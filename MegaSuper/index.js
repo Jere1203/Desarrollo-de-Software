@@ -10,20 +10,31 @@
 
 // console.log(p1.precioFinal())
 
-const { Producto, DescuentoFijo, DescuentoPorCantidad, DescuentoPorcentual, Carrito } = require('./domain.js')
+const { Producto, DescuentoFijo, DescuentoPorCantidad, DescuentoPorcentual, Carrito, ItemCarrito } = require('./domain.js')
 
 const descuentoFijo = new DescuentoFijo(5)
-const cocaCola = new Producto("Cocucha", 10, 1)
-const fideos = new Producto("Galles", 20, 1)
-//cocaCola.agregarDescuento(descuentoFijo)
+const p1 = new Producto("Cocucha", 10, 1)
+const p2 = new Producto("Galles", 20, 1)
+p1.agregarDescuento(descuentoFijo)
 
-// console.log(cocaCola)
-// console.log("El precio final es: " + cocaCola.precioFinal())
+// console.log(p1)
+// console.log("El precio final es: " + p1.precioFinal())
+p2.agregarDescuento(descuentoFijo)
+// console.log(p2)
+// console.log("El precio final es: " + p2.precioFinal())
 
-const carrito = new Carrito([cocaCola])
+let carrito = new Carrito()
+
+const cocucha = new ItemCarrito(p1, 1)
+const galles = new ItemCarrito(p2, 1)
+
+carrito.agregarProducto(p1)
+carrito.agregarProducto(p2)
+
+console.log("El valor final del carrito es de: " + carrito.precioFinalCarrito())
+
 console.log(carrito)
 
-// carrito.agregarProducto(cocaCola)
 
 function aumentarPrecioBaseForEach(productos, monto) {
     productos.forEach(producto => {

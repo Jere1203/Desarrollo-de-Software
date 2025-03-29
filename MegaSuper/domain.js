@@ -9,8 +9,8 @@
 // producto = "asdf"
 // console.log(producto)
 
-let p1 = "variable"
-const p2 = "constante"
+// let p1 = "variable"
+// const p2 = "constante"
 
 class Producto {
 
@@ -98,6 +98,24 @@ class Carrito {
     agregarProducto(unProducto) {
         this.productos.push(unProducto)
     }
+
+    precioFinalCarrito() {
+        return this.productos.reduce(
+            (valorTotal, producto) => {return valorTotal + producto.precioFinal()
+            }, 0
+        )
+    }
 }
 
-module.exports = {Producto, DescuentoFijo, DescuentoPorCantidad, DescuentoPorcentual, Carrito}
+class ItemCarrito {
+    constructor(producto, cantidad) {
+        this.producto = producto
+        this.cantidad = cantidad
+    }
+
+    precioFinal() {
+        return this.producto.precioFinal()
+    }
+}
+
+module.exports = {Producto, DescuentoFijo, DescuentoPorCantidad, DescuentoPorcentual, Carrito, ItemCarrito}

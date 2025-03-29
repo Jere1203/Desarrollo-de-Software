@@ -27,16 +27,6 @@ class Producto {
         this.descuentos.push(nuevoDescuento)
     }
 
-    precioFinal() {
-        const precioBaseTotal = this.#precioBase * this.cantidad
-        const precioFinal = this.descuentos.reduce( //Reduce tiene la misma logica de un "Fold"
-            (precioAnterior, descuento) => {
-                return precioAnterior - descuento.valorDescontado(precioBaseTotal, this.cantidad)
-            }, precioBaseTotal
-        )
-        return Math.max(0, precioFinal)
-        }
-
 
 // Cuando un atributo es privado para llamarlo necesito el getter y setter
     get precioBase() { //Getter
@@ -107,15 +97,21 @@ class Carrito {
     }
 }
 
-class ItemCarrito {
+class ItemCarrito{
     constructor(producto, cantidad) {
         this.producto = producto
         this.cantidad = cantidad
     }
 
     precioFinal() {
-        return this.producto.precioFinal()
-    }
+        const precioBaseTotal = this.producto.precioBase * this.cantidad
+        const precioFinal = this.producto.descuentos.reduce( //Reduce tiene la misma logica de un "Fold"
+            (precioAnterior, descuento) => {
+                return precioAnterior - descuento.valorDescontado(precioBaseTotal, this.cantidad)
+            }, precioBaseTotal
+        )
+        return Math.max(0, precioFinal)
+        }
 }
 
 module.exports = {Producto, DescuentoFijo, DescuentoPorCantidad, DescuentoPorcentual, Carrito, ItemCarrito}

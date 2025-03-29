@@ -28,8 +28,11 @@ let carrito = new Carrito()
 const cocucha = new ItemCarrito(p1, 1)
 const galles = new ItemCarrito(p2, 1)
 
-carrito.agregarProducto(p1)
-carrito.agregarProducto(p2)
+// carrito.agregarProducto(p1)
+// carrito.agregarProducto(p2)
+
+carrito.agregarProducto(cocucha)
+carrito.agregarProducto(galles)
 
 console.log("El valor final del carrito es de: " + carrito.precioFinalCarrito())
 
